@@ -1,0 +1,25 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "torchserve"
+  #namespace: kserve-test
+  namespace: a-my-test-namespace
+  annotations:
+    # set target like Knative
+    #autoscaling.knative.dev/target: "10"
+    autoscaling.knative.dev/target-utilization-percentage: "100"
+    networking.knative.dev/http-protocol: "redirected"
+spec:
+  predictor:
+    # enable hard-limit, a sort of an enforced upper bound
+    containerConcurrency: 10
+    # like autoscaling.knative.dev/target
+    #scaleTarget: 10
+    scaleMetric: concurrency
+    # enable scale-to-zero
+    minReplicas: 0
+    #maxReplicas: 10
+    model:
+      modelFormat:
+        name: pytorch
+      storageUri: gs://kfserving-examples/models/torchserve/image_classifier/v1

@@ -1,0 +1,34 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: autoscale-go
+  #namespace: default
+  namespace: a-my-test-namespace
+  annotations:
+    networking.knative.dev/disable-auto-tls: "true"
+    #networking.knative.dev/http-protocol: "redirected"
+spec:
+  template:
+    metadata:
+      annotations:
+        # Standard Kubernetes CPU-based autoscaling.
+        #autoscaling.knative.dev/class: hpa.autoscaling.knative.dev
+        #autoscaling.knative.dev/metric: cpu
+        
+        # Knative concurrency-based autoscaling (default).
+        autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+        autoscaling.knative.dev/metric: concurrency
+
+        # Target 10 requests in-flight per pod (soft-limit).
+        #autoscaling.knative.dev/target: "10"
+        # Target maximum number of requests the Container can handle at once.
+        autoscaling.knative.dev/target-utilization-percentage: "100"
+        # Disable scale to zero with a min scale of 1.
+        #autoscaling.knative.dev/min-scale: "1"
+        # Limit scaling to 100 pods.
+        autoscaling.knative.dev/max-scale: "50"
+    spec:
+      # Target 10 requests in-flight per pod (hard-limit).
+      containerConcurrency: 100
+      containers:
+      - image: gcr.io/knative-samples/autoscale-go:0.1

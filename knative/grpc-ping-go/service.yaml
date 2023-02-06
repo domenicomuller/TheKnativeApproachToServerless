@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: grpc-ping
+  namespace: default
+  annotations:
+    #networking.knative.dev/disable-auto-tls: "true"
+    networking.knative.dev/http-protocol: "redirected"
+spec:
+  template:
+    metadata:
+      annotations:
+        # Disable scale to zero with a min scale of 1.
+        #autoscaling.knative.dev/min-scale: "1"
+    spec:
+      containers:
+      - image: docker.io/domll/grpc-ping-go
+        ports:
+          - name: h2c
+            containerPort: 8080
+
