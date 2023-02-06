@@ -17,24 +17,14 @@ metadata:
   name: gitwebhook
   namespace: default
   annotations:
-    #networking.knative.dev/disable-auto-tls: "true"
+    networking.knative.dev/disable-auto-tls: "true"
     networking.knative.dev/http-protocol: "redirected"
 spec:
   template:
-    metadata:
-      annotations:
-        # Disable scale to zero with a min scale of 1.
-        #autoscaling.knative.dev/min-scale: "1"
     spec:
       containers:
-      - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-        image: docker.io/domll/gitlabwebhook-go:latest
+      - image: docker.io/domll/gitlabwebhook-go:latest
         env:
-        #- name: GITHUB_PERSONAL_TOKEN
-        #  valueFrom:
-        #    secretKeyRef:
-        #      name: githubsecret
-        #      key: personalAccessToken
         - name: WEBHOOK_SECRET
           valueFrom:
               secretKeyRef:
