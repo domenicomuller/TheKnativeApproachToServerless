@@ -9,8 +9,6 @@ metadata:
 spec:
   template:
     spec:
-      # Target 10 requests in-flight per pod (hard-limit).
-      containerConcurrency: 10
       containers:
       - image: docker.io/domll/helloworld-go-serving
         env:

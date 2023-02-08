@@ -1,6 +1,6 @@
 # **Install Knative**
 
-Below we will show the steps on how to install Knative on a ready Kubernetes cluster. The procedure will be followed through the use of the Knative Operator.
+Below I will show the steps on how to install Knative on a ready Kubernetes node. The procedure will be followed through the use of the Knative Operator.
 
 # Instructions
 
@@ -119,7 +119,7 @@ and check with
 
     $ kubectl get configmap config-network -n knative-serving -o yaml
 
-## deploy service with https redirected
+## Deploy service with https redirected
 
     apiVersion: serving.knative.dev/v1
     kind: Service
@@ -140,11 +140,11 @@ and check with
 
 # Uninstall
 
-## Remove the Knative Serving component
+## Remove the knative-serving component
 
     $ kubectl delete KnativeServing knative-serving -n knative-serving
 
-## Remove Knative Eventing component
+## Remove knative-eventing component
 
     $ kubectl delete KnativeEventing knative-eventing -n knative-eventing
 

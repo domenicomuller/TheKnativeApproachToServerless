@@ -2,9 +2,9 @@
 
 Repository dedicated to the practical work carried out for my master's degree thesis in **Engineering in computer science** at **Sapienza - Università di Roma**
 
-Below you will find instructions for preparing a Kubernetes cluster using **K3S** as the chosen distribution and **Istio** as the ingress controller.
+Below you will find instructions for preparing a Kubernetes node using **K3S** as the chosen distribution and **Istio** as the ingress controller.
 
-For installing Knative please refer to the guide in the [knative](knative) folder.
+For Knative installation please refer to the guide in the [knative](knative) folder.
 
 # Instructions
 
@@ -43,3 +43,9 @@ Enable auto-completion
 Install Istio with default parameters
 
     $ istioctl install -y
+
+# Uninstall
+
+If you installed K3s using the installation script, a script to uninstall K3s was generated during installation. To uninstall K3s from a server node, run:
+
+    $ /usr/local/bin/k3s-uninstall.sh
